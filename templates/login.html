@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login</title>
+    <script
+      src="https://kit.fontawesome.com/26ade6b3e7.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+      body {
+        background-image: url("/static/b.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: "Roboto", sans-serif;
+      }
+
+      .login-box {
+        width: 380px;
+        height: 400px;
+        margin: auto;
+        margin-top: 110px;
+        background: rgba(15, 26, 232, 0.2);
+        border: 2.2px solid rgba(15, 26, 232, 0.2);
+        border-radius: 3px;
+      }
+      h1 {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.671);
+        padding-top: 15px;
+        font-style: italic;
+      }
+
+      form {
+        width: 300px;
+        margin-left: 20px;
+      }
+      form label {
+        display: flex;
+        margin-top: 40px;
+        font-size: 18px;
+      }
+      form input {
+        width: 100%;
+        padding: 7px;
+        background-color: transparent;
+        border-color: #8e74bd;
+        border-radius: 6px;
+      }
+      .password-container {
+        position: relative;
+      }
+
+      .password-container input {
+        padding-right: 10px; 
+      }
+      .toggle-password {
+        color: #000; 
+      }
+      #togglePasswordVisibility {
+        position: absolute;
+        top: 19.7rem;
+        left: 715px;
+        transform: translateY(-50%);
+        border: none;
+        color: black;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      #togglePasswordVisibility:hover {
+        opacity: 1;
+      }
+      button {
+        width: 320px;
+        height: 35px;
+        margin-top: 40px;
+        border: none;
+        background-color: #4e3778;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 18px;
+      }
+      .remember-me {
+        padding-left: 15px;
+        padding-top: 20px;
+        font-size: 15px;
+      }
+      .account {
+        text-align: center;
+        color: #3f269a;
+        font-weight: 900;
+        font-size: 20px;
+      }
+      .account a {
+        font-weight: 900;
+        color: #ff00aa;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-box">
+      <form action="" method="post">
+        {% csrf_token %}
+        <h1>Login</h1>
+        <label>Username</label>
+        <input
+          type="text"
+          required
+          name="username"
+          placeholder="Enter Username"
+        />
+        <label>Password</label>
+        <div class="password-input">
+          <input
+            type="password"
+            required
+            name="pass"
+            placeholder="Password"
+            id="passwordInput"
+          />
+          <button type="button" id="togglePasswordVisibility">
+            <i class="fa-regular fa-eye-slash" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <button type="submit">submit</button>
+      </form>
+      <div class="remember-me"><input type="checkbox" />Remember Me</div>
+    </div>
+    <p class="account">
+      Not have an account? <a href="{% url 'signup' %}">Sign Up Here</a>
+    </p>
+    <script>
+     document.addEventListener("DOMContentLoaded", function() {
+    const passwordInput = document.getElementById("passwordInput");
+    const togglePasswordVisibility = document.getElementById("togglePasswordVisibility");
+    const togglePasswordIcon = togglePasswordVisibility.querySelector("i");
+
+    togglePasswordVisibility.addEventListener("click", function () {
+        // Toggle the type of the password input
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            togglePasswordIcon.classList.remove("fa-eye-slash");
+            togglePasswordIcon.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            togglePasswordIcon.classList.remove("fa-eye");
+            togglePasswordIcon.classList.add("fa-eye-slash");
+        }
+    });
+});
+
+    </script>
+  </body>
+</html>

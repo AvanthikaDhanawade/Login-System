@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <script
+      src="https://kit.fontawesome.com/26ade6b3e7.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+      body {
+        background-image: url("/static/b.jpg");
+        background-size: cover;
+        background-position: center;
+        font-family: "Roboto", sans-serif;
+      }
+      .signup-box {
+        width: 380px;
+        height: 560px;
+        margin: auto;
+        margin-top: 50px;
+        background: rgba(15, 26, 232, 0.2);
+        border: 2.2px solid rgba(15, 26, 232, 0.2);
+        border-radius: 3px;
+      }
+      h1 {
+        text-align: center;
+        font-weight: 900;
+        color: #fff;
+      }
+      h4 {
+        text-align: center;
+        font-size: 18px;
+      }
+      form {
+        width: 300px;
+        margin-left: 20px;
+      }
+      form label {
+        display: flex;
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+      form input {
+        width: 100%;
+        padding: 7px;
+        background-color: transparent;
+        border-color: #8e74bd;
+        border-radius: 4px;
+      }
+      .password-container {
+        position: relative;
+      }
+
+      .password-container input {
+        padding-right: 10px; /* Adjust for icon size */
+      }
+      .toggle-password {
+        /* Additional styles ... */
+        color: #000; /* Set icon color to black */
+      }
+      #togglePasswordVisibility {
+        position: absolute;
+        top: -2px;
+        left: 130px;
+        transform: translateY(-50%);
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      #togglePasswordVisibility:hover {
+        opacity: 1;
+      }
+      .toggle-password2 {
+        font-size: 1.2em;
+      }
+      #toggleConfirmPasswordVisibility {
+        position: absolute;
+        top: 15px;
+        left: 280px;
+        transform: translateY(-50%);
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      button {
+        width: 320px;
+        height: 35px;
+        margin-top: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4e3778;
+        color: #fff;
+        font-size: 20px;
+      }
+      .terms-policy {
+        text-align: center;
+        padding-top: 25px;
+        font-size: 15px;
+      }
+      .account {
+        text-align: center;
+        color: #3f269a;
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .account a {
+        font-weight: 900;
+        color: #ff00aa;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    {% load static %}
+    <div class="signup-box">
+      <form action="" method="post">
+        {% csrf_token %}
+        <h1>SIGN UP</h1>
+        <h4>Please sign up to get a great Experiences</h4>
+        <label>Username</label>
+        <input type="text" required name="username" placeholder="Username" />
+        <label>Email</label>
+        <input
+          type="email"
+          required
+          name="email"
+          placeholder="example@gmail.com"
+        />
+        <label>Password</label>
+        <div class="password-container">
+          <input
+            type="password"
+            id="passwordInput"
+            placeholder="Enter password"
+            name="password1"
+          />
+          <button type="button" id="togglePasswordVisibility">
+            <i class="fa fa-eye-slash toggle-password" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <!-- ... existing HTML ... -->
+
+        <label>Confirm Password</label>
+        <div class="password-container">
+          <input
+            type="password"
+            id="confirmPasswordInput"
+            placeholder="Confirm Password"
+            name="password2"
+          />
+          <i
+            class="fa fa-eye-slash toggle-password2"
+            id="toggleConfirmPasswordVisibility"
+            aria-hidden="true"
+          ></i>
+        </div>
+
+        <!-- ... rest of your HTML ... -->
+
+        <button>submit</button>
+      </form>
+      <div class="terms-policy">
+        <input type="checkbox" required />Agree to
+        <a href="#">Terms & Condition </a> and
+        <a href="#"> Policy & Privacy</a>
+      </div>
+    </div>
+    <p class="account">
+      Already have an account? <a href="{% url 'login' %}">Login Here</a>
+    </p>
+    <script>
+      const togglePasswordVisibility = document.getElementById(
+        "togglePasswordVisibility"
+      );
+      const passwordInput = document.getElementById("passwordInput");
+      const togglePasswordIcon =
+        togglePasswordVisibility.querySelector(".toggle-password");
+
+      const toggleConfirmPasswordVisibility = document.getElementById(
+        "toggleConfirmPasswordVisibility"
+      );
+      const confirmPasswordInput = document.getElementById(
+        "confirmPasswordInput"
+      );
+
+      togglePasswordVisibility.addEventListener("click", function () {
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          togglePasswordIcon.classList.remove("fa-eye-slash");
+          togglePasswordIcon.classList.add("fa-eye");
+        } else {
+          passwordInput.type = "password";
+          togglePasswordIcon.classList.remove("fa-eye");
+          togglePasswordIcon.classList.add("fa-eye-slash");
+        }
+      });
+
+      toggleConfirmPasswordVisibility.addEventListener("click", function () {
+        if (confirmPasswordInput.type === "password") {
+          confirmPasswordInput.type = "text";
+          toggleConfirmPasswordVisibility.classList.remove("fa-eye-slash");
+          toggleConfirmPasswordVisibility.classList.add("fa-eye");
+        } else {
+          confirmPasswordInput.type = "password";
+          toggleConfirmPasswordVisibility.classList.remove("fa-eye");
+          toggleConfirmPasswordVisibility.classList.add("fa-eye-slash");
+        }
+      });
+    </script>
+  </body>
+</html>
